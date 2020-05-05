@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+struct node {
+	int val;
+	int index;
+	int vis;
+	struct node*next[1000];
+};
+struct queue{
+	int front;
+	int back;
+	int que[1000];
+	};
+void bfs(int i,struct node*arr[],int n,struct queue*q)
+{
+	arr[i]->vis=1;
+	q->que[q->front++]=arr[i]->val;
+	printf("%d\n",arr[i]->val);
+	while (q->front!=q->back)
+	{
+		int a1=q->front-q->back;
+		int t=0;
+		int flag=0;
+		while (t<a1)
+		{
+			
+			t++;
+			int x=q->que[q->back];
+			for (int j = 0; j < arr[x]->index; j += 1)
+			{
+				int y=arr[x]->next[j]->val;
+				if (arr[y]->vis==0)
+				{
+					flag=1;
+					q->que[q->front++]=arr[y]->val;
+					arr[y]->vis=1;
+					printf("%d ",arr[y]->val);
+				}
+			}
+			
+			q->back++;
+		}
+		if(flag)
+		printf("\n");
+	}
+}
+int main (int argc, char *argv[])
+{
+	int n,m;
+	scanf("%d%d",&n,&m);
+	struct node*arr[n];
+	for (int i = 0; i < n; i += 1)
+	{
+		arr[i]=(struct node*)malloc(sizeof(struct node));
+		arr[i]->val=i;
+		arr[i]->index=0;
+		arr[i]->vis=0;
+	}
+	for (int i = 0; i < m; i += 1)
+	{
+		int a,b;
+		scanf("%d%d",&a,&b);
+		arr[a]->next[arr[a]->index++]=arr[b];
+		arr[b]->next[arr[b]->index++]=arr[a];
+	}
+	struct queue *q=(struct queue*)malloc(sizeof(struct queue));
+	q->front=0;
+	q->back=0;
+	int u;
+	printf("enter the number from which you want to see the minimum distances\n");
+	scanf("%d",&u);
+	printf("the bfs of it is\n");
+	bfs(u,arr,n,q);
+	return 0;
+}
