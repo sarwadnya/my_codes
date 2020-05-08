@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+int count;
+void merger(int arr[],int l,int mid,int r)
+{
+	int n1=mid-l+1;
+	int n2=r-mid;
+	int L[n1];
+	int R[n2];
+	int index=0;
+	for (int i = l; i < mid+1; i += 1)
+	{
+		L[index++]=arr[i];
+	}
+	index=0;
+	for (int i = mid+1; i < r+1; i += 1)
+	{
+		R[index++]=arr[i];
+	}
+	index=l;
+	int i=0,j=0;
+	while (i<n1 || j<n2)
+	{
+		if (i>=n1)
+		{
+			while (j<n2)
+			{
+				arr[index++]=R[j++];
+			}
+			break;
+		}
+		if (j>=n2)
+		{
+			while (i<n1)
+			{
+				arr[index++]=L[i++];
+			}
+			break;
+		}
+		if (L[i]<R[j])
+		{
+			arr[index++]=L[i++];
+		}
+		else
+		{
+			count+=mid-l-i+1;
+			arr[index++]=R[j++];
+		}
+	}
+}
+void merge(int arr[],int l,int r)
+{	
+	if (l<r)
+	{
+		int mid=(l+r)/2;
+		merge(arr,l,mid);
+		merge(arr,mid+1,r);
+		merger(arr,l,mid,r);
+	}
+}
+int main (int argc, char *argv[])
+{
+		int n;
+		scanf("%d",&n);
+		int arr[n];
+		for (int i = 0; i < n; i += 1)
+		{
+			scanf("%d",&arr[i]);
+		}
+		merge(arr,0,n-1);
+		printf("%d",count);
+	return 0;
+}
