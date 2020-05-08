@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+struct node{
+	int val;
+	int vis;
+	int index;
+	struct node*next[1000];
+	};
+struct queue{
+	int front;
+	int back;
+	int que[1000];
+	};
+void dfs(int a,struct node*arr[],struct queue*q)
+{
+	if (arr[a]->vis==1)
+	{
+		return;
+	}
+	printf("%d ",arr[a]->val);
+	arr[a]->vis=1;
+	for (int i = 0; i < arr[a]->index; i += 1)
+	{
+		dfs(arr[a]->next[i]->val,arr,q);
+	}
+}
+int main (int argc, char *argv[])
+{
+	int n,m;
+	scanf("%d%d",&n,&m);
+	struct node*arr[n];
+	struct queue*q;
+	for (int i = 0; i < n; i += 1)
+	{
+		arr[i]=(struct node*)malloc(sizeof(struct node));
+		arr[i]->val=i;
+		arr[i]->vis=0;
+		arr[i]->index=0;
+	}
+	for (int i = 0; i < m; i += 1)
+	{
+		int a,b;
+		scanf("%d%d",&a,&b);
+		arr[a]->next[arr[a]->index++]=arr[b];
+		arr[b]->next[arr[b]->index++]=arr[a];
+	}
+	q=(struct queue*)malloc(sizeof(struct queue));
+	q->front=0;
+	q->back=0;
+	dfs(0,arr,q);
+	return 0;
+}
