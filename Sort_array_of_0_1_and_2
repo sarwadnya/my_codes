@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+void swap(int arr[],int a,int b)
+{
+	int t=arr[a];
+	arr[a]=arr[b];
+	arr[b]=t;
+}
+int main (int argc, char *argv[])
+{
+	int n;
+	scanf("%d",&n);
+	int arr[n];
+	for (int i = 0; i < n; i += 1)
+	{
+		scanf("%d",&arr[i]);
+	}
+	int m=0,l=0,h=n-1;
+	while (m<=h)
+	{
+		if (arr[m]==1 || arr[m]==2 || arr[m]==0)
+		{
+			if (arr[m]==2)
+			{
+				swap(arr,m,h);
+				h--;
+			}
+			if (arr[m]==1)
+			{
+				m++;
+			}
+			if (arr[m]==0)
+			{	
+				swap(arr,m,l);
+				m++;
+				l++;
+			}
+		}
+		else
+		{
+			printf("INVALID ENTRY ");
+			return 0;
+		}
+		
+	}
+	for (int i = 0; i < n; i += 1)
+	{
+		printf("%d ",arr[i]);
+	}
+	return 0;
+}
