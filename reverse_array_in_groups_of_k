@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+int min(int a,int b)
+{
+	return (a<b?a:b);
+}
+int main (int argc, char *argv[])
+{
+	int n,k;
+	scanf("%d%d",&n,&k);
+	int arr[n];
+	for (int i = 0; i < n; i += 1)
+	{
+		scanf("%d",&arr[i]);
+	}
+	for (int i = 0; i < n; i += k)
+	{
+		int start=i;
+		int end=min(i+k-1,n-1);
+		while (start<=end)
+		{
+			int y=arr[start];
+			arr[start]=arr[end];
+			arr[end]=y;
+			start++;
+			end--;
+		}
+	}
+	for (int i = 0; i < n; i += 1)
+	{
+		printf("%d ",arr[i]);
+	}
+	return 0;
+}
