@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+int flag=0;
+int num;
+int k;
+int partition(int arr[],int l,int r)
+{
+	int key=arr[r];
+	int i=l-1;
+	for (int j = l; j < r; j += 1)
+	{
+		if (arr[j]<key)
+		{
+			i++;
+			int t=arr[j];
+			arr[j]=arr[i];
+			arr[i]=t;
+		}
+	}
+	int t=arr[i+1];
+	arr[i+1]=arr[r];
+	arr[r]=t;
+	return i+1;
+}
+int Q;
+void quick(int arr[],int l,int r)
+{
+	if (flag)
+	{
+		return;
+	}
+	if (l<=r)
+	{
+		int q=partition(arr,l,r);
+		//printf("q = %d l = %d r = %d\n",q,l,r);
+		if (q+1==k)
+		{
+			Q=q;
+			num=arr[q];
+			flag=1;
+			return;
+		}
+		else if (q+1<k)
+		{
+			//printf("hi1\n");
+			quick(arr,q+1,r);
+		}
+		else if(q+1>k)
+		{
+			//printf("hi2\n");
+			quick(arr,l,q-1);
+		}
+		
+	}
+}
+int main (int argc, char *argv[])
+{
+	int n;
+	scanf("%d",&n);
+	int arr[n];
+	for (int i = 0; i < n; i += 1)
+	{
+		scanf("%d",&arr[i]);
+	}
+	scanf("%d",&k);
+	flag=0;
+	quick(arr,0,n-1);
+	printf("%d",num);
+	return 0;
+}
