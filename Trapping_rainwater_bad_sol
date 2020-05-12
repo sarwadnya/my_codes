@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+int min(int a,int b)
+{	
+	return (a<b?a:b);
+}
+int max(int a,int b)
+{
+	return (a>b?a:b);
+}
+int main (int argc, char *argv[])
+{
+	int t;
+	scanf("%d",&t);
+	while (t--)
+	{
+		int n;
+	scanf("%d",&n);
+	int arr[n];
+	int arr1[n];
+	for (int i = 0; i < n; i += 1)
+	{
+		scanf("%d",&arr[i]);
+		arr1[i]=arr[i];
+	}
+	for (int i = 0; i < n; i += 1)
+	{
+		int m1=INT_MIN;
+		for (int j = 0; j < i; j += 1)
+		{
+			if (m1<arr[j])
+			{
+				m1=arr[j];
+			}
+		}
+		int m2=INT_MIN;
+		for (int j = i+1; j < n; j += 1)
+		{
+			if (m2<arr[j])
+			{
+				m2=arr[j];
+			}
+		}
+		//printf("i = %d m1 = %d m2 = %d el = %d ",i,m1,m2,arr[i]);
+		int x=min(m1,m2);
+		//printf("%d\n",x);
+		if(x>=arr[i])
+		arr1[i]=x-arr[i];
+		else
+		arr1[i]=0;
+	}
+	int sum=0;
+	for (int i = 0; i < n; i += 1)
+	{
+		sum+=arr1[i];
+	}
+	printf("%d\n",sum);
+
+	}
+	return 0;
+}
