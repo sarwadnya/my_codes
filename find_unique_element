@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+void bin_search(int arr[],int l,int r)
+{
+	if (l<=r)
+	{
+		int mid=(l+r)/2;
+		if (arr[mid+1]!=arr[mid] && arr[mid-1]!=arr[mid])
+		{
+			printf("%d",arr[mid]);
+			return;
+		}
+		else
+		{
+			bin_search(arr,l,mid-1);
+			bin_search(arr,mid+1,r);
+		}
+	}
+}
+int main (int argc, char *argv[])
+{
+	int n;
+	scanf("%d",&n);
+	int arr[n];
+	for (int i = 0; i < n; i += 1)
+	{
+		scanf("%d",&arr[i]);
+	}
+	bin_search(arr,0,n-1);
+	return 0;
+}
