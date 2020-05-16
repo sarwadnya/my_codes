@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+int main (int argc, char *argv[])
+{
+	int n;
+	scanf("%d",&n);
+	int arr[n];
+	int counter=2;
+	while (counter<=n)
+	{
+		if (n%counter==0)
+		{
+			
+			printf("UNLUCKY\n");
+			return 0;
+		}
+		n-=(n/counter);
+		counter++;
+	}
+	printf("LUCKY\n");
+	return 0;
+}
