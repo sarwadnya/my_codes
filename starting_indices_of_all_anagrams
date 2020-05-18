@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+#include <string.h>
+int integer(char c)
+{
+	return ((int)c-97);
+}
+int check_anagram(char ch1[],char ch2[])
+{
+	int n=strlen(ch1);
+	int hash1[26],hash2[26];
+	for (int i = 0; i < 26; i += 1)
+	{
+		hash1[i]=0;
+		hash2[i]=0;
+	}
+	for (int i = 0; i < n; i += 1)
+	{
+		hash1[integer(ch1[i])]++;
+		hash2[integer(ch2[i])]++;
+	}
+	for (int i = 0; i < 26; i += 1)
+	{
+		if (hash1[i]!=hash2[i])
+		{
+			return 0;
+		}
+	}
+	return 1;
+}
+int main (int argc, char *argv[])
+{
+	char ch1[1000];
+	char ch2[1000];
+	scanf("%s",ch1);
+	scanf("%s",ch2);
+	int n1,n2;
+	n1=strlen(ch1);
+	n2=strlen(ch2);
+	char ch3[n2];
+	int index;
+	int count[n1];
+	int counter=0;
+	for (int i = 0; i < n1; i += 1)
+	{
+		index=0;
+		while (index+i<n1)
+		{
+			ch3[index++]=ch1[i+index];
+		}
+		if (check_anagram(ch2,ch3))
+		{
+			count[counter++]=i;
+		}
+	}
+	for (int i = 0; i < counter; i += 1)
+	{
+		printf("%d ",count[i]);
+	}
+	return 0;
+}
