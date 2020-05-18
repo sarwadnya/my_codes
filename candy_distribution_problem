@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+int max(int a,int b)
+{	
+	return (a>b?a:b);
+}
+int main (int argc, char *argv[])
+{
+	int n;
+	scanf("%d",&n);
+	int arr[n];
+	int candy1[n];
+	int candy2[n];
+	for (int i = 0; i < n; i += 1)
+	{
+		candy1[i]=1;
+		candy2[i]=1;
+		scanf("%d",&arr[i]);
+	}
+	for (int i = 1; i < n; i += 1)
+	{
+		if (arr[i]>arr[i-1])
+		{
+			candy1[i]=candy1[i-1]+1;
+		}
+	}
+	for (int i = n-2; i >= 0; i -= 1)
+	{
+		if (arr[i]>arr[i+1])
+		{
+			candy2[i]=candy2[i+1]+1;
+		}
+	}
+	int sum=0;
+	for (int i = 0; i < n; i += 1)
+	{
+		//printf("%d ",candy[i]);
+		sum+=max(candy1[i],candy2[i]);
+	}
+	printf("%d\n",sum);
+	return 0;
+}
