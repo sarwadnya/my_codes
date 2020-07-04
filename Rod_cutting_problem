@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+int rod_cut(int arr[],int n)
+{
+	int dp[n+1];
+	dp[0]=0;
+	for (int i = 1; i <= n; i += 1)
+	{
+		int q=INT_MIN;
+		for (int j = 1; j < i+1; j += 1)
+		{
+			q=max(q,(dp[i-j]+arr[j]));
+		}
+		dp[i]=q;
+	}
+	printf("%d\n",dp[n]);
+}
+int main (int argc, char const* argv[])
+{
+	int l,n;
+	cin>>l>>n;
+	int arr[n+1];
+	arr[0]=0;
+	for (int i = 1; i < n+1; i += 1)
+	{
+		cin>>arr[i];
+	}
+	//this we have taken the input and now we need to process it.
+	rod_cut(arr,n);
+	return 0;
+}
