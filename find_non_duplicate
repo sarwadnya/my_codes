@@ -18,4 +18,5 @@ int main (int argc, char const* argv[])
 	}
 	printf("%d\n",s);
 	return 0;
+	//taken from leetcode
 }
