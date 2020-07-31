@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main (int argc, char const* argv[])
+{
+	int a;
+	char c='a';
+	vector<int>arr;
+	while (c!='\n')
+	{
+		scanf("%d%c",&a,&c);
+		arr.push_back(a);
+	}
+	int n=arr.size();
+	int s=arr[0];
+	for (int i = 1; i < n; i += 1)
+	{
+		s=s^arr[i];
+	}
+	printf("%d\n",s);
+	return 0;
+}
