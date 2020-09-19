@@ -1,0 +1,72 @@
+import numpy as np
+import random
+def maxi(Q,index):
+    tum=0
+    for i in range(n):
+        if tum<Q[index,i]:
+            tum=Q[index,i]
+    return tum
+print("enter the number of rooms")
+n=int(input("states:"))
+n=6
+print(n)
+R=np.zeros((n,n))
+final=n-1
+gamma=0.8
+print("Give the payoffs of actions between states ")
+for i in range(n):
+    for j in range(n):
+        R[i,j]=int(input())
+        #R[i,j]=-1
+#R[0,4]=0
+#R[1,3]=0
+#R[2,3]=0
+#R[3,1]=0
+#R[3,2]=0
+#R[3,4]=0
+#R[4,0]=0
+#R[4,3]=0
+#R[5,1]=0
+#R[5,4]=0
+#R[1,5]=100
+#R[4,5]=100
+#R[5,5]=100
+
+Q=np.zeros((n,n))
+itr=200000
+for i in range(itr):
+    curr=random.randint(0,n-1)
+    while curr!=final :
+        available_actions=[]
+        length=0
+        for j in range(n):
+            if R[curr,j]>=0 :
+                available_actions.append(j)
+                length=length+1
+        index=available_actions[random.randint(0,length-1)]
+        Q[curr,index]=R[curr,index] + (gamma*(maxi(Q,index)))
+        curr=index
+print(Q) 
+print("now lets test the working of our trained Q-matrix")
+for i in range(n):
+    i=int(input())
+    print("testing for i="+str(i))
+    curr =i
+    actions=[]
+    actions.append(curr)
+    while curr!=n-1:
+        tum=Q[curr,0]
+        index=0
+        #print("tum="+str(tum))
+        for j in range(n):
+            if tum<Q[curr,j]:
+                tum=Q[curr,j]
+                index=j
+        curr=index;
+        actions.append(curr)
+        #print("index="+str(index))
+    
+    print("the path taken for i="+str(i)+"is as follows")
+    print(actions)
+    print("\n")
+    
