@@ -6,6 +6,10 @@ int num;
 int k;
 int partition(int arr[],int l,int r)
 {
+	int h=l+(rand()%(r-l+1));
+	int y=arr[h];
+	arr[h]=arr[r];
+	arr[r]=y;
 	int key=arr[r];
 	int i=l-1;
 	for (int j = l; j < r; j += 1)
