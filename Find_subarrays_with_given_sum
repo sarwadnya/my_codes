@@ -1,0 +1,20 @@
+int ret_sumber_of_subarrays(int arr[],int n,int sum)
+{
+  int counter=0;
+      	map<int,int>mapare;
+      	int curr_sum=0;//will store the sum of all elements upto i th element
+    	  for(int i=0;i<n;i++)
+    	  { 
+    	      curr_sum+=arr[i];
+    	      if(curr_sum==s)
+    	      { 
+    	          counter++;
+    	     } 
+    	      if(mapare.find(curr_sum-s)!=mapare.end())
+    	      { 
+    	          counter++;
+    	      } 
+    	      mapare[curr_sum]=i;
+    	  }
+    	  return counter;
+        }
