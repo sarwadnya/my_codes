@@ -1,0 +1,71 @@
+bool isPalindrome(Node *head)
+{
+    //Your code here
+    //base case
+    if(head->next==NULL)
+        return true;
+    if(head->next->next==NULL)
+    {
+        if(head->next->data==head->data)
+        return true;
+        return false;
+    }
+    Node*h1=head,*h2=head;
+    int counter=0;
+    while(h1!=NULL)
+    {
+        counter++;
+        h1=h1->next;
+    }
+    //cout<<counter<<endl;
+    h1=head;
+    int x=counter/2;//to get to the midway point
+    Node*prev=NULL;
+    while(x--)
+    {
+        prev=h1;
+        h1=h1->next;
+    }
+    if(counter%2)
+    {
+        h1=h1->next;
+        prev=prev->next;
+    }
+    h2=prev;
+    /*cout<<h1->data<<endl;
+    cout<<prev->data<<endl;*/
+    //h1 now is on the first node of the linked list which we have to reverse.
+    //reversing the list from the midway point to the end.
+    Node*curr=h1,*front=h1;
+    while(curr!=NULL)
+    {
+        front=curr->next;
+        curr->next=prev;
+        prev=curr;
+        curr=front;
+    }
+    h2->next=prev;
+    while(prev->next!=h2)
+        prev=prev->next;
+    h1=prev->next;
+    h1=h1->next;
+    prev->next=NULL;
+    // now that the linked list has been reversed we have to just compare the two halves
+    /*Node*head1=head;
+    while(head1!=NULL)
+    {
+        cout<<head1->data<<" ";
+        head1=head1->next;
+    }
+    cout<<endl;*/
+    h2=head;
+    
+    while(h1!=NULL)
+    {
+        if(h1->data!=h2->data)
+            return false;
+        h1=h1->next;
+        h2=h2->next;
+    }
+    return true;
+}
