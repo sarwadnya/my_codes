@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+  int n;
+  cin>>n;
+  int arr[n];
+  for(int i=0;i<n;i++)
+  {
+    cin>>arr[i];
+  }
+  //we check bit by bit for each of the 32 bits if the array type is integer which it is in this case but in case it is long long int then we need to go to 64 bits
+  int sum=0;
+  int count=0;
+  int index=1;
+  for(int i=0;i<32;i++)
+  {
+    count=0;
+    for(int j=0;j<n;j++)
+    {
+      if((index&arr[i])>>i ==1)
+      count++;
+    }
+    index<<1;
+    sum+=(count*(n-count))%1000000007;//we create the number of pairs of elements of the array that differ in the i th bit.
+    cout<<(2*sum)%1000000007<<endl;//we multiply by 2 because in the question, (i,j) and (j,i) are considered to be two different pairs of numbers.
+  }
+  return 0;
+}
