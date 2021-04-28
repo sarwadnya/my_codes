@@ -1,0 +1,34 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+  int n;
+  cin>>n;
+  int arr[n];
+  for(int i=0;i<n;i++)
+  {
+    cin>>arr[i];
+  }
+  sort(arr,arr+n);//for vector it is - sort(vec.begin(),vec.end());
+  int end=n-1;
+  while(end>=2)
+  {
+    int left=0,right=end-1;
+    while(left<right)
+    {
+      int x=arr[left]+arr[right]+arr[end];
+      if(x==0)
+      {
+        cout<<"yes"<<endl;
+        return 0;
+      }
+      else if(x>0)
+        right--;
+      else
+        left++;
+    }
+    end--;
+  }
+  cout<<"NO"<<endl;
+  return 0;
+}
