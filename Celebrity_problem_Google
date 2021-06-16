@@ -1,0 +1,45 @@
+int check_cel(int cel,vector<vector<int>>M)
+    {
+        for(int i=0;i<M.size();i++)
+        {
+            if(i==cel)
+                continue;
+            if(M[i][cel]==0)
+                return -1;
+        }
+        for(int i=0;i<M[0].size();i++)
+        {
+            if(i==cel)
+                continue;
+            if(M[cel][i]==1)
+                return -1;
+        }
+        return cel;
+    }
+    int celebrity(vector<vector<int> >& M, int n) 
+    {
+        int start=0;
+        int end=M.size()-1;
+        int pot_cel=-1;
+        while(start<end)
+            if(M[start][end]==0 && M[end][start]==1)
+            {
+                end--;
+                pot_cel=start;
+            }
+            else if(M[start][end]==1 && M[end][start]==0)
+            {
+                start++;
+                pot_cel=end;
+            }
+            else
+            {
+                start++;
+                end--;
+            }
+        if(start==end && check_cel(start,M)>=0)
+            return start;
+        if(pot_cel!=-1 && check_cel(pot_cel,M)>=0)
+            return pot_cel;
+        return -1;
+    }
