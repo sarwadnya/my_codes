@@ -13,6 +13,8 @@ int main()
     {
       sum+=(a<<count);
     }
+    index<<=1;
+    count++;
   }
   cout<<sum<<endl;
   return 0;
