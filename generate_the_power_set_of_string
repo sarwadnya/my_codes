@@ -1,0 +1,23 @@
+#include<bits/stdc++.h>
+using namespace std;
+void finder(string s,vector<string>vec,int index,string str)
+{
+  if(index==s.length())
+  {
+    vec.push_back(str);
+    return;
+  }
+  finder(s,vec,index+1,str);
+  finder(s,vec,index+1,str+s[index]);
+}
+int main()
+{
+  string s;
+  cin>>s;
+  vector<string>vec;
+  finder(s,vec,0,"");
+  sort(vec.begin(),vec.begin()+1);
+  for(int i=0;i<vec.size();i++)
+    cout<<vec[i]<<" ";
+  return 0;
+}
