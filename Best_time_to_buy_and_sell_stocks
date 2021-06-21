@@ -1,0 +1,21 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+  int n;
+  cin>>n;
+  int prices[n];
+  for(int i=0;i<n;i++)
+    cin>>prices[i];
+  for(int i=n-1;i>0;i--)
+    prices[i]-=prices[i-1];
+  int max_sum=0,curr_sum=0;
+  for(int i=0;i<n;i++)
+  {
+    curr_sum+=arr[i];
+    curr_sum=max(curr_sum,arr[i]);
+    max_sum=max(max_sum,curr_sum);
+  }
+  cout<<max_sum<<endl;
+  return 0;
+}
