@@ -1,0 +1,18 @@
+void next_perm(vector<int>vec)
+{
+  for(int i=vec.size()-1;i>0;i--)
+  {
+    if(vec[i]>vec[i-1])
+    {
+      int index=i;
+      while(index<n && vec[index]>vec[i-1])
+        index++;
+      int t=vec[index];
+      vec[index]=vec[i-1];
+      vec[i-1]=t;
+      sort(vec.begin()+i,vec.end());
+      return;
+    }
+  }
+  sort(vec.begin(),vec.end());
+}
