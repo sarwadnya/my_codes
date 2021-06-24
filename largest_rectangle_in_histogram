@@ -1,0 +1,46 @@
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+  int n;
+  cin>>n;
+  int arr[n];
+  for(int i=0;i<n;i++)
+    cin>>arr[i];
+  int lm[n],rm[n];
+  lm[0]=-1;
+  rm[n-1]=-1;
+  for(int i=1;i<n;i++)
+  {
+    int index=i-1;
+    while(index>=0 && arr[index]>=arr[i])
+      index=lm[index];
+    if(index==-1)
+      lm[i]=-1;
+    else
+      lm[i]=index;
+  }
+  for(int i=n-2;i>=0;i--)
+  {
+    int index=i+1;
+    while(index!=-1 && index<n && arr[index]>=arr[i])
+      index=rm[index];
+    if(index==-1)
+      rm[i]=-1;
+    else
+      rm[i]=index;
+  }
+  int sum=0;
+  for(int i=0;i<n;i++)
+  {
+    int front,back;
+    if(rm[i]==-1)
+      front=n-1;
+    else
+      front=rm[i]-1;
+    back=lm[i]+1;
+    sum=max(sum,(front-back+1)*arr[i]);
+  }
+  cout<<sum<<endl;
+  return 0;
+}
