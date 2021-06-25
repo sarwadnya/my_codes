@@ -1,0 +1,24 @@
+node* reverse(node*head,int k)
+{
+  node*curr=head,*prev=NULL,*ret=NULL,*front=head,*temp1=NULL;
+  while(curr)
+  {
+    node*temp=curr;
+    int k1=k;
+    while(curr && k1--)
+    {
+      front=curr->next;
+      curr->next=prev;
+      prev=curr;
+      curr=next;
+    }
+    if(!ret)
+      ret=prev;
+    temp->next=curr;
+    if(temp1)
+      temp1->next=prev;
+    temp1=temp;
+    prev=temp;
+  }
+  return ret;
+}
