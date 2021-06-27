@@ -1,0 +1,47 @@
+//here we will first reverse the list
+//then we will go node by node and see if the carry goes all the way through the number
+//if it does then we have to add a new node at the end of the list and put the carry into it
+//then we need to reverse the list again to get the number back in its real form
+Node*reverselist(Node*head)
+{
+  Node*prev=NULL,*curr=head,*front=head;
+  while(curr)
+  {
+    front=curr->next;
+    curr->next=prev;
+    prev=curr;
+    curr=front;
+  }
+  return prev;
+}
+Node*adder(Node*head)
+{
+  head=reverselist(head);
+  int carry=1;
+  Node*temp=head;
+  while(carry)
+  { 
+    if(temp->data<9)
+    {
+      temp->data++;
+      carry=0;
+      break;
+    }
+    else 
+    {
+      temp->data=0;
+      carry=1;
+      if(temp->next==NULL)
+      {
+        Node*n=(Node*)malloc(sizeof(Node));
+        n->data=1;
+        temp->next=n;
+        break;
+      }
+      else
+      {
+        temp=temp->next;
+      }
+    }
+  }
+}
