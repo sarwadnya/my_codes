@@ -1,0 +1,31 @@
+TreeNode* deleteNode(TreeNode* root, int key) {
+        if(!root)
+            return root;
+        if(key==root->val)
+        {
+            if(root->right==NULL)
+            {
+                return root->left;
+            }
+            TreeNode*temp=root->right,*t=NULL;
+            while(temp->left)
+            {
+                t=temp;
+                temp=temp->left;
+            }
+            if(t)
+            {
+                t->left=temp->right;
+                temp->right=root->right;
+            }
+            temp->left=root->left;
+            root->left=NULL;
+            root->right=NULL;
+            return temp;
+        }
+        if(key<root->val)
+            root->left= deleteNode(root->left,key);
+        if(key>root->val)
+            root->right= deleteNode(root->right,key);
+        return root;
+    }
