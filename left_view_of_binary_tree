@@ -1,0 +1,21 @@
+set<int>st;
+void helper(Node*root,int lev,vector<int>&vec)
+{
+    if(root==NULL)
+        return;
+    if(st.find(lev)==st.end())
+    {
+        vec.push_back(root->data);
+    }
+    st.insert(lev);
+    helper(root->left,lev+1,vec);
+    helper(root->right,lev+1,vec);
+}
+vector<int> leftView(Node *root)
+{
+   // Your code here
+   vector<int>vec;
+   st.clear();
+   helper(root,0,vec);
+   return vec;
+}
