@@ -3,7 +3,10 @@
 #include <limits.h>
 int partition(int arr[],int l,int r)
 {
-	int key=arr[r];
+	int key=arr[r];//this line is for normal quicksort
+	//the following line is for randomised quicksort(better)
+	//int key=(l+random()%(r-l+1));
+	//key=arr[key]; swap arr[r] and arr[key] and proceed.
 	int i=l-1;
 	for (int j = l; j < r; j += 1)
 	{
