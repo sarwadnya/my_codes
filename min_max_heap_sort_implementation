@@ -1,0 +1,93 @@
+#include<bits/stdc++.h>
+using namespace std;
+int left(int i)
+{
+    return 2*i+1;
+}
+int right(int i)
+{
+    return 2*i+2;
+}
+void max_heapify(int arr[],int index,int n)
+{
+    int maximum=index;
+    if(left(index)<n && arr[maximum]<arr[left(index)])
+    {
+        maximum=left(index);
+    }
+    if(right(index)<n && arr[maximum]<arr[right(index)])
+    {
+        maximum=right(index);
+    }
+    if(maximum==index)
+        return;
+    int t=arr[index];
+    arr[index]=arr[maximum];
+    arr[maximum]=t;
+    max_heapify(arr,maximum,n);
+}
+void min_heapify(int arr[],int index,int n)
+{
+    int minimum=index;
+    if(left(minimum)<n && arr[left(minimum)]<arr[index])
+    {
+        minimum=left(index);
+    }
+    if(right(minimum)<n && arr[right(minimum)]<arr[index])
+    {
+        minimum=right(index);
+    }
+    if(minimum!=index)
+    {
+        int t=arr[minimum];
+        arr[minimum]=arr[index];
+        arr[index]=t;
+        min_heapify(arr,minimum,n);
+    }
+}
+int main()
+{
+    int n;
+    cin>>n;
+    int arr[n];
+    for(int i=0;i<n;i++)
+        cin>>arr[i];
+    for(int i=n/2;i>=0;i--)
+    {
+        max_heapify(arr,i,n);
+    }
+    cout<<"dec"<<endl;
+    int n1=n;
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr[0];
+        int t=arr[0];
+        arr[0]=arr[n1-1];
+        arr[n1-1]=t;
+        n1--;
+        for(int j=n1/2;j>=0;j--)
+        {
+            max_heapify(arr,j,n1);
+        }
+    }
+    cout<<endl;
+    cout<<"asc"<<endl;
+    n1=n;
+    for(int i=n/2;i>=0;i--)
+    {
+        min_heapify(arr,i,n);
+    }
+    for(int i=0;i<n;i++)
+    {
+        cout<<arr[0];
+        int t=arr[0];
+        arr[0]=arr[n1-1];
+        arr[n1-1]=t;
+        n1--;
+        for(int j=n1/2;j>=0;j--)
+        {
+            min_heapify(arr,j,n1);
+        }
+    }
+    return 0;
+}
