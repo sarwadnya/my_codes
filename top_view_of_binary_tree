@@ -1,0 +1,63 @@
+void find_lev(Node*root,vector<int>&levor)
+    {
+        queue<Node*>que;
+        que.push(root);
+        while(que.size())
+        {
+            Node*temp=que.front();
+            if(temp->left)
+            {
+                que.push(temp->left);
+            }
+            if(temp->right)
+            {
+                que.push(temp->right);
+            }
+            levor.push_back(temp->data);
+            que.pop();
+        }
+    }
+    map<int,vector<int>>mp;
+    void helper(Node*root,int index)
+    {
+        if(root->left)
+        {
+            helper(root->left,index-1);
+        }
+        mp[index].push_back(root->data);
+        if(root->right)
+        {
+            helper(root->right,index+1);
+        }
+    }
+    vector<int> topView(Node *root)
+    {
+        //Your code here
+        vector<int>levor;
+        find_lev(root,levor);
+        mp.clear();
+        helper(root,0);
+        vector<int>vec;
+        for(auto i:mp)
+        {
+            int flag=0;
+            for(int j=0;j<levor.size();j++)
+            {
+                flag=0;
+                for(int k=0;k<i.second.size();k++)
+                {
+                    if(i.second[k]==levor[j])
+                    {
+                        flag=1;
+                        break;
+                    }
+                }
+                if(flag==1)
+                {
+                    vec.push_back(levor[j]);
+                    break;
+                }
+            }
+        }
+        return vec;
+    }
