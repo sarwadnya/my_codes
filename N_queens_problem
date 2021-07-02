@@ -1,0 +1,55 @@
+bool issafe(int cols[],int row,int c)
+    {
+        for(int i=0;i<row;i++)
+            if(abs(row-i)==abs(c-cols[i]))
+                return false;
+        return true;
+    }
+    vector<vector<string>>vec;
+    set<int>st;
+    vector<string>form_vec_str(int arr[],int n)
+    {
+        vector<string>v;
+        for(int i=0;i<n;i++)
+        {
+            string s="";
+            for(int j=0;j<n;j++)
+            {
+                s+='.';
+            }
+            s[arr[i]-1]='Q';
+            v.push_back(s);
+        }
+        return v;
+    }
+    bool helper(int cols[],int n,int index)//index goe sfrom 0 to n-1
+    {
+        if(index==n)
+        {
+            vec.push_back(form_vec_str(cols,n));
+            return true;
+        }
+        for(int i=1;i<=n;i++)
+        {
+            if(st.find(i)==st.end() && issafe(cols,index,i))
+            {
+                cols[index]=i;
+                st.insert(i);
+                helper(cols,n,index+1);
+                st.erase(i);
+                cols[index]=0;
+            }
+        }
+        return false;
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        int cols[n];
+        st.clear();
+        vec.clear();
+        memset(cols,0,sizeof(cols));
+        if(helper(cols,n,0))
+            for(int i=0;i<n;i++)
+                cout<<cols[i]<<" ";
+        cout<<endl;
+        return vec;
+    }
