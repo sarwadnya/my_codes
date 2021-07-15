@@ -1,0 +1,30 @@
+int minSwaps(vector<int>&nums)
+	{
+	    // Code here
+	    vector<pair<int,int>>vec;
+	    for(int i=0;i<nums.size();i++)
+	    {
+	        vec.push_back({nums[i],i});
+	        //cout<<vec[i].first<<" "<<vec[i].second<<endl;
+	    }
+	    sort(vec.begin(),vec.end());
+	    int count=0;
+	    for(int i=0;i<nums.size();i++)
+	    {
+	        if(vec[i].second!=i)
+	        {
+	            count++;
+	            int a1,a2,a3,a4;
+	            a1=vec[i].first;
+	            a2=vec[i].second;
+	            a3=vec[a2].first;
+	            a4=vec[a2].second;
+	            vec[a2].first=a1;
+	            vec[a2].second=a2;
+	            vec[i].first=a3;
+	            vec[i].second=a4;
+	            i--;
+	        }
+	    }
+	    return count;
+	}
