@@ -1,0 +1,31 @@
+Node* merge(Node*h1,Node*h2)
+{
+    if(h1==NULL)
+        return h2;
+    if(h2==NULL)
+        return h1;
+    Node*res;
+    if(h1->data > h2->data)
+    {
+        res=h2;
+        res->bottom=merge(h1,h2->bottom);
+    }
+    else
+    {
+        res=h1;
+        res->bottom=merge(h1->bottom,h2);
+    }
+    res->next=NULL;
+    return res;
+}
+Node *flatten(Node *root)
+{
+   // Your code here
+   while(root->next)
+   {
+       Node*r=root->next->next;
+       root=merge(root,root->next);
+       root->next=r;
+   }
+   return root;
+}
