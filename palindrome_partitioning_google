@@ -1,0 +1,40 @@
+ vector<vector<string>>vec;
+    bool pal(string s)
+    {
+        if(s.length()==0)
+            return false;
+        int srt=0,end=s.length()-1;
+        while(srt<end)
+        {
+            if(s[srt]!=s[end])
+                return false;
+            srt++;
+            end--;
+        }
+        return true;
+    }
+    void helper(string s,int index,string str,vector<string>v)
+    {
+        if(index==s.length())
+        {
+            if(pal(str))
+            {
+                v.push_back(str);
+                vec.push_back(v);    
+            }
+            return;
+        }
+        if(pal(str))
+        {
+            v.push_back(str);
+            helper(s,index,"",v);
+            v.erase(v.end()-1,v.end());
+        }
+        helper(s,index+1,str+s[index],v);
+    }
+    vector<vector<string>> partition(string s) {
+        vec.clear();
+        vector<string>v;
+        helper(s,0,"",v);
+        return vec;
+    }
