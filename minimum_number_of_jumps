@@ -1,0 +1,26 @@
+// we need to consider which element is going to take us to the farthest possible point.
+int minJumps(int arr[], int n){
+        // Your code here
+        int jumps=0;
+        for(int i=0;i<n;)
+        {
+            int index=i,val=arr[i],m=0,m_index=index+1,flag=1;
+            while(index<n && val--)
+            {
+                index++;
+                if(m<arr[index]+index)
+                {
+                    flag=0;
+                    m=arr[index]+index;  ////// We are not just looking at the element with the highest possible value but we want the element + its location to be the highest
+                    m_index=index;
+                }
+            }
+            if(index>=n-1)
+                return jumps+1;
+            if(flag==1)
+                return -1;
+            i=m_index;
+            jumps++;
+        }
+        return jumps;
+    }
