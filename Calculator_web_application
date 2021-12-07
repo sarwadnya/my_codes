@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+        Calculator
+        </title>
+    </head>
+    <style>
+        .grid
+        {
+            display: grid;
+            grid-template-columns: 50px 50px 50px 50px ;
+            grid-template-rows: 50px 50px 50px 50px
+                                50px 50px 50px 50px
+                                50px 50px 50px 50px;
+            max-width: 50%;
+            margin-left:400px;
+            text-align: center;
+            background-color: white;
+        }
+        input#calc.area{
+            border-radius: 10px;
+        }
+        .area
+        {
+            grid-column-end: span 4 ;
+            grid-row-end:span 2 ;
+        }
+        /* ******************************************************** */
+        .clear
+        {
+            grid-area: auto;
+        }
+        .delete
+        {
+            grid-area: auto;
+        }
+        .divide
+        {
+            grid-area: auto;
+        }
+        .multiply
+        {
+            grid-area: auto;
+        }
+        /* *********************************************** */
+        .seven
+        {
+            grid-area: auto;
+        }
+        .eight
+        {
+            grid-area: auto;
+        }
+        .nine
+        {
+            grid-area: auto;
+        }
+        .minus
+        {
+            grid-area: auto;
+        }
+        /* *********************************************** */
+        .one
+        {
+            grid-area: auto;
+        }
+        .two
+        {
+            grid-area: auto;
+        }
+        .three
+        {
+            grid-area: auto;
+        }
+        .plus
+        {
+            grid-row-end:span 2 ; 
+            grid-area: auto;
+        }
+        /* *********************************************** */
+        .four
+        {
+            grid-area: auto;
+        }
+        .five
+        {
+            grid-area: auto;
+        }
+        .six
+        {
+            grid-area: auto;
+        }
+
+        /* *********************************************** */
+        .modulus
+        {
+            grid-area: auto;
+        }
+        .zero
+        {
+            grid-area: auto;
+        }
+        .decimal
+        {
+            grid-area: auto;
+        }
+        .equals
+        {
+            grid-area: auto;
+        }
+        input#num1{
+            width: 100%;
+            height: 100%;
+            font-family:monospace;
+            font-size: 17px;
+        }
+        input#num1:hover{
+            background-color: grey;
+        }
+    </style>
+    <body>
+        <script>
+            function ik(c)
+            {
+                document.getElementById('calc').value += c;
+            }
+            function clearer()
+            {
+                document.getElementById('calc').value="";
+            }
+            function del()
+            {
+                document.getElementById('calc').value = document.getElementById('calc').value.slice(0,-1);
+            }
+            function calculate()
+            {
+                try
+                {
+                    document.getElementById('calc').value=eval(document.getElementById('calc').value)
+                }
+                catch
+                {
+                    alert("INVALID EXPRESSION")
+                }
+            }
+        </script>
+        <div id="textarea" class="grid">
+            <input id="calc" class="area" type="text" placeholder="Enter Your Expression" required>
+            <!-- ****************************************** -->
+            <div class="clear">
+                <br>
+                <input id='num1' type='button' onclick='clearer();'  value="C">
+            </div>
+            <div class="delete">
+                <br>
+                <input id='num1' type='button' onclick='del();'  value="D">
+            </div>
+            <div class="divide">
+                <br>
+                <input id='num1' type='button' onclick='ik("/");'  value="/">
+            </div>
+            <div class="multiply">
+                <br>
+                <input id='num1' type='button' onclick='ik("*");'  value="*">
+            </div>
+            <!-- ******************************************* -->
+            <div class="seven">
+                <br>
+                <input id='num1' type='button' onclick='ik("7");'  value="7">
+            </div>
+            <div class="eight">
+                <br>
+                <input id='num1' type='button' onclick='ik("8");'  value="8">
+            </div>
+            <div class="nine">
+                <br>
+                <input id='num1' type='button' onclick='ik("9");'  value="9">
+            </div>
+            <div class="minus">
+                <br>
+                <input id='num1' type='button' onclick='ik("-");'  value="-">
+            </div>
+            <!-- **************************************** -->
+            <div class="four">
+                <br>
+                <input id='num1' type='button' onclick='ik("4");'  value="4">
+            </div>
+            <div class="five">
+                <br>
+                <input id='num1' type='button' onclick='ik("5");'  value="5">
+            </div>
+            <div class="six">
+                <br>
+                <input id='num1' type='button' onclick='ik("6");'  value="6">
+            </div>
+            <div class="plus">
+                <br>
+                <input id='num1' type='button' onclick='ik("+");'  value="+">
+            </div>
+            <!-- *************************************** --> 
+            <div class="one">
+                <br>
+                <input id='num1' type='button' onclick='ik("1");'  value="1">
+            </div>
+            <div class="two">
+                <br>
+                <input id='num1' type='button' onclick='ik("2");'  value="2">
+            </div>
+            <div class="three">
+                <br>
+                <input id='num1' type='button' onclick='ik("3");'  value="3">
+            </div>
+            <!-- ************************************** -->
+            <div class="modulus">
+                <br>
+                <input id='num1' type='button' onclick='ik("%");'  value="%">
+            </div>
+            <div class="zero">
+                <br>
+                <input id='num1' type='button' onclick='ik("0");'  value="0">
+            </div>
+            <div class="decimal">
+                <br>
+                <input id='num1' type='button' onclick='ik(".");'  value=".">
+            </div>
+            <div class="equals">
+                <br>
+                <input id='num1' type='button' onclick='calculate(document.getElementById("calc").value)'  value="=">
+            </div>
+        </div>
+    </body>
+</html>
