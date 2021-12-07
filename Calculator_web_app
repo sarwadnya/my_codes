@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Calculator</title>
+        <link rel="stylesheet" type="text/css" media='screen' href="main.css">
+        </head>
+        <style>
+            .calcbody{
+                max-width:300px;
+                box-shadow: 0px 0px 33px 12px rgba(153,153,153,1);
+                margin:10vh auto 0 auto;
+            }
+            .display{
+                text-align: right;
+                height: 50px;
+                line-height: 70px;  
+                font-size: 15px;
+                width: 98%;
+            }
+            /* #zero{
+                font-size: 25px;
+                text-align: right;
+                padding-right:10px;
+                margin-bottom: 5px;
+                
+            } */
+            .buttons{
+                display: grid;
+                border-bottom: 1px solid #999;
+                border-left: 1px solid #999;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            
+            }
+            .butt>div{
+                border-top:1px solid #999;
+                border-right:1px solid #999;
+            
+            }
+            .butt{
+                font-size: 25px;
+                border:1px solid #999;
+                padding: 12px 3px ;
+                text-align: center;
+                cursor: pointer;
+                border-radius: 8px;
+            }
+            #del{
+                background-color: rgba(241, 19, 19, 0.959);
+            }
+            #equal{
+               background-color: rgb(30, 57, 180);
+               color: #fff;
+            }
+            .button:hover{
+                background-color: black;
+                color: #fff;
+                transition: 0.5s ease-in-out;
+            }
+        </style>
+        <body>
+            <script>
+                function gattu(c)
+                {
+                    document.getElementById('calc').value += c;
+                }
+                function clearer()
+                {
+                    document.getElementById('calc').value = "";
+                }
+                function valuer()
+                {
+                    try
+                    {
+                        document.getElementById('calc').value = eval(document.getElementById('calc').value);
+                    }
+                    catch
+                    {
+                        alert("Invalid Expression");
+                    }
+                }
+                function deler()
+                {
+                    document.getElementById('calc').value = document.getElementById('calc').value.slice(0,-1);
+                }
+            </script>
+            <section>
+            <div class="calcbody">
+                <input id="calc" class="display" type="text" placeholder="Enter Your Expression" required>
+                <div class="buttons">
+                    <div class="butt">
+                        <input id="clear" type="button" onclick="clearer();" value="C">
+                    </div>
+                    <div class="butt">
+                        <input id="divide" type="button" onclick="gattu('/');" value="/">
+                    </div>
+                    <div class="butt">
+                        <input id="modulus" type="button" onclick="gattu('%');" value="%">
+                    </div>
+                    <div class="butt">
+                        <input id="del" type="button" onclick="deler();" value="D">
+                    </div>
+                    <div class="butt">
+                        <input id="seven" type="button" onclick="gattu('7');" value="7">
+                    </div>
+                    <div class="butt">
+                        <input id="eight" type="button" onclick="gattu('8');" value="8">
+                    </div>
+                    <div class="butt">
+                        <input id="nine" type="button" onclick="gattu('9');" value="9">
+                    </div>
+                    <div class="butt">
+                        <input id="multiply" type="button" onclick="gattu('*');" value="*">
+                    </div>
+                    <div class="butt">
+                        <input id="four" type="button" onclick="gattu('4');" value="4">
+                    </div>
+                    <div class="butt">
+                        <input id="five" type="button" onclick="gattu('5');" value="5">
+                    </div>
+                    <div class="butt">
+                        <input id="six" type="button" onclick="gattu('6');" value="6">
+                    </div>
+                    <div class="butt">
+                        <input id="sub" type="button" onclick="gattu('-');" value="-">
+                    </div>
+                    <div class="butt">
+                        <input id="one" type="button" onclick="gattu('1');" value="1">
+                    </div>
+                    <div class="butt">
+                        <input id="two" type="button" onclick="gattu('2');" value="2">
+                    </div>
+                    <div class="butt">
+                        <input id="three" type="button" onclick="gattu('3');" value="3">
+                    </div>
+                    <div class="butt">
+                        <input id="add" type="button" onclick="gattu('+');" value="+">
+                    </div>
+                    <div class="butt">
+                        <input id="zero" type="button" onclick="gattu('0');" value="0"> 
+                    </div>
+                    <div class="butt">
+                        <input id="zeros" type="button" onclick="gattu('00');" value="00">
+                    </div>
+                    <div class="butt">
+                        <input id="decimal" type="button" onclick="gattu('.');" value=".">
+                    </div>
+                    <div class="butt">
+                        <input id="divide" type="button" onclick="valuer();" value="=">
+                    </div>
+                </div>
+            </div>
+        </section>
+        </body>
+        </html>
